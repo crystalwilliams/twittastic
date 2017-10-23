@@ -2,9 +2,11 @@
 
 <h1>Tweets</h1>
 
-<% image_tag current_user.avatar.url, size: 100 %>
+<% if current_user.avatar.url %>
+  <%= image_tag current_user.avatar.url, size: 100 %>
+<% end -%>
 
-<table>
+<table class="table table-hover table-striped">
   <thead>
     <tr>
       <th>Message</th>
@@ -17,7 +19,7 @@
     <% @tweets.each do |tweet| %>
       <tr>
         <td><%= tweet.message %></td>
-        <td><%= tweet.user_id %></td>
+        <td><%= tweet.user.username %></td>
         <td><%= link_to 'Show', tweet %></td>
         <td><%= link_to 'Edit', edit_tweet_path(tweet) %></td>
         <td><%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -28,4 +30,4 @@
 
 <br>
 
-<%= link_to 'New Tweet', new_tweet_path %>
+<%= link_to 'New Tweet', new_tweet_path, class: 'btn btn-info' %>
