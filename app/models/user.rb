@@ -18,4 +18,8 @@ class User < ApplicationRecord
 
   validates :name, presence: true
   validates :username, presence: true, uniqueness: true
+
+  def likes?(tweet)
+    tweet.likes.where(user_id: id).any?
+  end
 end
